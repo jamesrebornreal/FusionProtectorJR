@@ -68,3 +68,10 @@ Just give credit where it makes sense — not asking for anything big, just basi
 You are welcome to study, reuse, and build upon this work.
 
 The only request is that proper credit is given where due, as a sign of respect for the time, effort, and iteration that went into this project.
+---
+
+## Thanks
+
+Credit goes to Lakatrazz for a good multiplayer mod. I’m just trying to improve it, so hopefully this is taken in a good light.
+
+There is no malicious intent in releasing this — I’m simply moving on, that’s all. I really enjoyed making this, but it’s time for something new. Also, thanks to all the people who suggested ideas — you know who you are.
