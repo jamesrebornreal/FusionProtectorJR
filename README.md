@@ -2,70 +2,69 @@
 
 ## Overview
 
-This project is a client-side protection and mitigation system developed for Fusion.  
-Its primary purpose is to identify, prevent, and reduce abusive behavior and client-side exploits, ultimately improving the experience for legitimate players.
+This is a protection / mitigation system made for Fusion. The main goal is to catch and reduce abusive behavior and client-side exploits so the experience is better for legit players.
 
-The project was developed over approximately six months of continuous iteration, experimentation, and refinement.
-
----
-
-## Development Notes
-
-While the codebase may appear inconsistent or unstructured in certain areas, this is a natural result of rapid development focused on security response and exploit mitigation.
-
-Unlike previous collaborative projects, this project was primarily developed solo. As a result, maintaining perfect architecture sometimes took a back seat to implementing protections quickly and effectively as new exploits were discovered.
+This project took around 6 months of work on and off, with a lot of testing, fixing, and rewriting as new issues came up.
 
 ---
 
-## Use of AI
+## About the Code
 
-AI tools were used throughout development as a productivity aid.
+The code might look a bit messy in some places. That’s just how it ended up over time.
 
-This does not replace my understanding of the code. I fully understand the systems I write and use AI only as a tool to:
-- Improve development speed
-- Assist with iteration
-- Refine and optimize implementations
-
-This approach is consistent with how many modern developers integrate tooling into their workflow.
+Most of this was built solo, unlike some of my earlier projects where I had a teammate. Because of that, I was mostly focused on getting protections in fast when something broke or a new exploit showed up, rather than keeping everything perfectly structured all the time.
 
 ---
 
-## Purpose & Intent
+## AI Usage
 
-The goal of this project has always been to:
-- Detect and mitigate abusive client behavior
-- Address exploit-related vulnerabilities within Fusion
-- Improve the experience and safety of legitimate users
+Yeah, I used AI during development.
 
-If this project is ever released publicly, the intention is for others to explore, learn from, and potentially build upon it.
+I still understand everything in the code though — I’m not just copy/pasting stuff I don’t get. It was more of a tool to speed things up, help with ideas, and clean up or improve parts of the implementation.
 
----
-
-## Community & Collaboration
-
-I have no issue with others:
-- Learning from this project
-- Forking it
-- Creating spinoff implementations
-
-My hope is that Fusion itself may eventually adopt ideas or approaches implemented here, as the purpose of this work is to improve the platform and protect its community.
-
-Throughout development, I’ve met many incredible people through this process, several of whom I still communicate with today.
+Pretty much just another dev tool in the workflow.
 
 ---
 
-## Security Statement
+## What this is for
 
-There is intentionally nothing in this codebase designed to be reused for malicious or abusive client development.
+The main point of this project has always been simple:
 
-Every exploit addressed has been paired with corresponding protections, meaning replication of individual components provides limited value outside of defensive contexts.
+- stop abusive client behavior where possible  
+- patch exploit-related issues in Fusion  
+- make the game experience better for normal players  
+
+If it ever gets released properly, I just hope people find it useful or at least interesting to look through.
 
 ---
 
-## Developer Credit
+## Forks / reuse
 
-To developers who intend to use this project for legitimate purposes:
+I don’t really mind people taking ideas from this or building off it.
 
+If someone wants to fork it or make their own version, go ahead. If Fusion ends up adopting parts of it, that would honestly be ideal since the whole point is just improving the system and protecting the community.
+
+---
+
+## People / experience
+
+I met a lot of good people while working on this, and I still talk to some of them now. That’s honestly one of the better parts of the whole thing.
+
+---
+
+## Security note
+
+There’s nothing in here meant to be reused for making a malicious client.
+
+Anything that was exploited got paired with a fix or protection, so copying random parts of this won’t really give you anything useful for abuse anyway.
+
+---
+
+## Credit
+
+If you use this for something legit, feel free to build on it or learn from it.
+
+Just give credit where it makes sense — not asking for anything big, just basic respect for the work that went into it.
 You are welcome to study, reuse, and build upon this work.
 
 The only request is that proper credit is given where due, as a sign of respect for the time, effort, and iteration that went into this project.
