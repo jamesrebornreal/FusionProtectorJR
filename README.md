@@ -75,3 +75,78 @@ The only request is that proper credit is given where due, as a sign of respect 
 Credit goes to Lakatrazz for a good multiplayer mod. I’m just trying to improve it, so hopefully this is taken in a good light.
 
 There is no malicious intent in releasing this — I’m simply moving on, that’s all. I really enjoyed making this, but it’s time for something new. Also, thanks to all the people who suggested ideas — you know who you are.
+--
+
+## ⚙️ Feature Overview
+
+(This is only a glimpse — there is a lot more inside.)
+
+---
+
+## 🔒 Client Protections
+- Built-in malicious client detection systems
+- Exploit prevention mechanisms
+
+---
+
+## 🧰 Management Tools
+- Debug UI (Press **Y** to open enhanced server controls)
+- Permission-based menu sections
+- Recently Met Players panel
+- Instantly ban players or open Steam profiles
+
+---
+
+## 🔎 Search Tools
+- Spawnable Searcher
+- Avatar Searcher
+- Level Searcher
+
+---
+
+## 🎨 Customization
+- Custom Dev Tool presets
+- Custom Bodylog pages
+- Bodylog and Radial Menu color presets
+
+---
+
+## 🎒 Loadouts
+- Save and instantly apply inventory presets
+- “Keep Inventory” option carries loadouts across lobbies
+
+---
+
+## 🚨 Emergency Controls
+- Emergency Escape → Hold **Y + B**
+- Emergency Escape Avatar → Hold **X + A**
+- Emergency Reload Scene (Host Only)
+- Hold both thumbsticks for 10–20 seconds (full reset trigger)
+
+---
+
+## 🛡️ Safety Systems
+- Spawn block and warning system
+- Avatar kick management lists
+- Alternate account detection system
+- NSFW blocker (forces mature content OFF)
+- Media protection (blocks unsafe or inappropriate links)
+
+---
+
+## ⚡ Quality of Life
+- Custom Home World selection
+- Fusion profile presets (nickname, description, avatar, Bitmart items)
+- Expanded UI improvements across Fusion systems
+
+---
+
+## 👑 Owner Tools
+- Custom NPC spawners with randomizers + map lock
+- Custom teleporters with map lock
+
+---
+
+## 🔧 Moderation Control
+- Fusion global ban list toggle  
+  (Enable or disable Fusion’s built-in global bans in case of false positives)
