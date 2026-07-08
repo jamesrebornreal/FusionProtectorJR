@@ -56,6 +56,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
@@ -738,196 +739,7 @@ namespace FusionProtectorByJamesReborn
             public string Username { get; set; }
             public ulong PlatformID { get; set; }
         }
-        internal class FusionProtectorControversialPeople
-        {
-            public string FusionNicknameAtTheTime { get; set; }
-            public string SteamNameAtTheTime { get; set; }
-            public string SteamIDAtTheTime { get; set; }
-            public System.Collections.Generic.List<string> KnownSteamIds { get; set; } = new();
-            public System.Collections.Generic.List<string> KnownFusionNickNames { get; set; } = new();
-            public System.Collections.Generic.List<string> KnownSteamNames { get; set; } = new();
-            public System.Collections.Generic.List<string> KnownDiscordsUserIDS { get; set; } = new();
-
-            public string Reason { get; set; }
-            public string ControversyLevel { get; set; }
-            public FusionProtectorControversialPeople(
-                string fusionNicknameAtTheTime,
-                System.Collections.Generic.List<string> knownSteamIds,
-                System.Collections.Generic.List<string> Knownfusionnicknames,
-                System.Collections.Generic.List<string> knownsteamnames,
-                System.Collections.Generic.List<string> knowndiscordsids,
-                string reason,
-                string steamNameAtTheTime,
-                string controversyLevel,
-                string steamidatt)
-            {
-                FusionNicknameAtTheTime = fusionNicknameAtTheTime;
-                KnownSteamIds = knownSteamIds;
-                KnownFusionNickNames = Knownfusionnicknames;
-                KnownSteamNames = knownsteamnames;
-                KnownDiscordsUserIDS = knowndiscordsids;
-                Reason = reason;
-                SteamNameAtTheTime = steamNameAtTheTime;
-                ControversyLevel = controversyLevel;
-                SteamIDAtTheTime = steamidatt;
-            }
-            public string ToPrettyString()
-            {
-                string FormatList(System.Collections.Generic.List<string> list) =>
-                    list.Count == 0 ? "None" : string.Join(", ", list.Select(x => $"\"{x}\""));
-
-                return
-            $@"Fusion Nickname At The Time = ""{FusionNicknameAtTheTime}""
-Steam Name At The Time = ""{SteamNameAtTheTime}""
-Steam ID At The Time = ""{SteamIDAtTheTime}""
-Known Fusion Nicknames = {FormatList(KnownFusionNickNames)}
-Known Steam Names = {FormatList(KnownSteamNames)}
-Known Steam IDs = {FormatList(KnownSteamIds)}
-Known Discords User IDs = {FormatList(KnownDiscordsUserIDS)}
-Reason = ""{Reason}""
-Controversy Level = ""{ControversyLevel}""
-Steam Page Link = https://steamcommunity.com/profiles/{SteamIDAtTheTime}";
-            }
-            public void ShowOnPC()
-            {
-                string tempFilePath = Path.Combine(MelonEnvironment.UserDataDirectory, $"{FusionNicknameAtTheTime}_ControversialPlayer.txt");
-                if (File.Exists(tempFilePath))
-                {
-                    File.Delete(tempFilePath);
-                }
-                File.WriteAllText(tempFilePath, ToPrettyString());
-                Process.Start(new ProcessStartInfo
-                {
-                    FileName = tempFilePath,
-                    UseShellExecute = true
-                });
-            }
-            public FusionProtectorControversialPeople() { }
-        }
-        internal class FusionProtectorCommunityNotes
-        {
-            public string FusionNicknameAtTheTime { get; set; }
-            public string SteamNameAtTheTime { get; set; }
-            public string SteamIdAtTheTime { get; set; }
-            public System.Collections.Generic.List<string> KnownFusionNickNames { get; set; } = new();
-            public System.Collections.Generic.List<string> KnownSteamNames { get; set; } = new();
-            public System.Collections.Generic.List<string> KnownSteamIds { get; set; } = new();
-            public System.Collections.Generic.List<string> KnownDiscordsUserIDS { get; set; } = new();
-
-            public string Note { get; set; }
-
-            public FusionProtectorCommunityNotes(
-                string fusionNicknameAtTheTime,
-                string steamNameAtTheTime,
-                string steamIdAtTheTime,
-                string note,
-                System.Collections.Generic.List<string> knownFusionNickNames,
-                System.Collections.Generic.List<string> knownSteamNames,
-                System.Collections.Generic.List<string> knownSteamIds,
-                System.Collections.Generic.List<string> knownDiscordsIDS)
-            {
-                FusionNicknameAtTheTime = fusionNicknameAtTheTime;
-                SteamNameAtTheTime = steamNameAtTheTime;
-                SteamIdAtTheTime = steamIdAtTheTime;
-                Note = note;
-                KnownFusionNickNames = knownFusionNickNames;
-                KnownSteamNames = knownSteamNames;
-                KnownSteamIds = knownSteamIds;
-                KnownDiscordsUserIDS = knownDiscordsIDS;
-            }
-
-            public string ToPrettyString()
-            {
-                string FormatList(System.Collections.Generic.List<string> list) =>
-                    list.Count == 0 ? "None" : string.Join(", ", list.Select(x => $"\"{x}\""));
-
-                return
-$@"Fusion Nickname At The Time = ""{FusionNicknameAtTheTime}""
-Steam Name At The Time = ""{SteamNameAtTheTime}""
-Steam Id At The Time = ""{SteamIdAtTheTime}""
-Known Fusion Nicknames = {FormatList(KnownFusionNickNames)}
-Known Steam Names = {FormatList(KnownSteamNames)}
-Known SteamIds = {FormatList(KnownSteamIds)}
-Known Discords UserIDS = {FormatList(KnownDiscordsUserIDS)}
-Note = ""{Note}"";
-Steam Page Link = https://steamcommunity.com/profiles/{SteamIdAtTheTime}";
-            }
-            public void ShowOnPC()
-            {
-                string tempFilePath = Path.Combine(MelonEnvironment.UserDataDirectory, $"{FusionNicknameAtTheTime}_CommunityNote.txt");
-                if (File.Exists(tempFilePath))
-                {
-                    File.Delete(tempFilePath);
-                }
-                File.WriteAllText(tempFilePath, ToPrettyString());
-                Process.Start(new ProcessStartInfo
-                {
-                    FileName = tempFilePath,
-                    UseShellExecute = true
-                });
-            }
-
-
-            public FusionProtectorCommunityNotes() { }
-        }
-        internal class FusionProtectorGlobalBan
-        {
-            public string FusionNicknameAtTheTime { get; set; }
-            public string SteamNameAtTheTime { get; set; }
-            public System.Collections.Generic.List<string> KnownSteamIds { get; set; }
-            public string Reason { get; set; }
-            public string OptionalProof { get; set; }
-
-            public FusionProtectorGlobalBan(
-                string fusionnicknameatthetime,
-                System.Collections.Generic.List<string> knownsteamids,
-                string reason,
-                string steamNameAtTheTime)
-            {
-                FusionNicknameAtTheTime = fusionnicknameatthetime;
-                KnownSteamIds = knownsteamids;
-                Reason = reason;
-                SteamNameAtTheTime = steamNameAtTheTime;
-            }
-
-            public string ToPrettyString()
-            {
-                string FormatList(System.Collections.Generic.List<string> list) =>
-                    (list == null || list.Count == 0)
-                        ? "None"
-                        : string.Join(", ", list.Select(x => $"\"{x}\""));
-
-                string fusionNick = FusionNicknameAtTheTime ?? "Unknown";
-                string steamName = SteamNameAtTheTime ?? "Unknown";
-                string reason = Reason ?? "None";
-                string proof = OptionalProof ?? "None";
-
-                string primarySteamId = KnownSteamIds != null && KnownSteamIds.Count > 0
-                    ? KnownSteamIds[0]
-                    : "Unknown";
-
-                return $@"Fusion Nickname At The Time = ""{fusionNick}""
-Steam Name At The Time = ""{steamName}""
-Known Steam IDs = {FormatList(KnownSteamIds)}
-Reason = ""{reason}""
-Optional Proof = ""{proof}""
-Steam Page Link = https://steamcommunity.com/profiles/{primarySteamId}";
-            }
-            public void ShowOnPC()
-            {
-                string tempFilePath = Path.Combine(FusionProtectorFiles, $"{FusionNicknameAtTheTime}_FPGlobalBanInfo.txt");
-                if (File.Exists(tempFilePath))
-                {
-                    File.Delete(tempFilePath);
-                }
-                File.WriteAllText(tempFilePath, ToPrettyString());
-                Process.Start(new ProcessStartInfo
-                {
-                    FileName = tempFilePath,
-                    UseShellExecute = true
-                });
-            }
-        }
+    
         internal class AISpawner
         {
             public readonly string InstanceID;
@@ -1336,8 +1148,6 @@ Steam Page Link = https://steamcommunity.com/profiles/{primarySteamId}";
         internal static class SiteStuff
         {
             public static System.Collections.Generic.HashSet<string> mostusedexcl = new();
-            public static System.Collections.Generic.HashSet<FusionProtectorCommunityNotes> communitynotedplayers = new();
-            public static System.Collections.Generic.HashSet<FusionProtectorGlobalBan> globalfpbans = new();
             public static System.Collections.Generic.HashSet<int> globalblocklistmodioid = new();
 
             public static System.Collections.Generic.HashSet<int> globalaviblocklistmodioid = new();
@@ -1352,17 +1162,14 @@ Steam Page Link = https://steamcommunity.com/profiles/{primarySteamId}";
             public static System.Collections.Generic.HashSet<string> globalblocklistavatar = new();
             public static System.Collections.Generic.HashSet<string> blockednsfw = new();
             public static System.Collections.Generic.HashSet<FusionProtectorMediaPlayerProtections> MediaPlayerProtectionnow = new();
-            public static System.Collections.Generic.HashSet<FusionProtectorControversialPeople> fpcpeople = new();
             public static string custommediadoms;
 
             public static string VersionChecking;
-            public static string GlobalBanList;
             public static string GlobalBanCheckinglink;
             public static string AdditonWhitelistMediaPlayer;
             public static string MediaBlocker;
             public static string NSFWBlocker;
             public static string GlobalFPBlacklist;
-            public static string FusionProtectorControversialPeoplenow;
             public static string communitynotes;
             public static string mostusedthings;
 
@@ -1430,10 +1237,6 @@ Steam Page Link = https://steamcommunity.com/profiles/{primarySteamId}";
                                     GlobalBanCheckinglink = right;
                                     break;
 
-                                case "globalbanlist":
-                                    GlobalBanList = right;
-                                    break;
-
                                 case "additonwhitelistmediaplayer":
                                     AdditonWhitelistMediaPlayer = right;
                                     break;
@@ -1448,10 +1251,6 @@ Steam Page Link = https://steamcommunity.com/profiles/{primarySteamId}";
 
                                 case "globalfpblacklist":
                                     GlobalFPBlacklist = right;
-                                    break;
-
-                                case "fprotectorcontroversialpeople":
-                                    FusionProtectorControversialPeoplenow = right;
                                     break;
 
                                 case "communitynotes":
@@ -1498,46 +1297,6 @@ Steam Page Link = https://steamcommunity.com/profiles/{primarySteamId}";
 
             }
 
-
-            public static void FetchCommunitynotes()
-            {
-                communitynotedplayers.Clear();
-                MelonCoroutines.Start(ReadFromSite(communitynotes, (sitetext) =>
-                {
-                    CreateBackupAndStore("FusionProtectorCommunityNotes.txt", sitetext);
-                    var communitynotesnow = JsonSerializer.Deserialize<System.Collections.Generic.HashSet<FusionProtectorCommunityNotes>>(
-                        sitetext, options);
-                    communitynotedplayers = communitynotesnow;
-                    MelonLogger.Warning($"Total Fusion Protector Community Noted Players : {communitynotedplayers.Count}");
-                }));
-            }
-            public static void FetchfpGlobalBan()
-            {
-                globalfpbans.Clear();
-                MelonCoroutines.Start(ReadFromSite(GlobalBanList, (sitetext) =>
-                {
-                    CreateBackupAndStore("FusionProtectorGlobalBanList.txt", sitetext);
-
-                    var fpbanlist = JsonSerializer.Deserialize<System.Collections.Generic.HashSet<FusionProtectorGlobalBan>>(
-                        sitetext, options);
-                    globalfpbans = fpbanlist;
-                    MelonLogger.Warning($"Total Fusion Protector Global Bans : {globalfpbans.Count}");
-                }));
-            }
-            public static void FProtectorControversialPeople()
-            {
-                fpcpeople.Clear();
-                MelonCoroutines.Start(ReadFromSite(FusionProtectorControversialPeoplenow, (sitetext) =>
-                {
-                    CreateBackupAndStore("FusionProtectorControversialPeople.txt", sitetext);
-
-                    var fplist = JsonSerializer.Deserialize<System.Collections.Generic.HashSet<FusionProtectorControversialPeople>>(
-                        sitetext, options);
-
-                    fpcpeople = fplist;
-                    MelonLogger.Warning($"Total Fusion Controversial People : {fpcpeople.Count}");
-                }));
-            }
             public static void FetchVersionChecker()
             {
                 MelonCoroutines.Start(ReadFromSite(VersionChecking, (sitetext) =>
@@ -1742,9 +1501,6 @@ Steam Page Link = https://steamcommunity.com/profiles/{primarySteamId}";
                 var steps = new (string Name, Action Action)[]
                 {
         ("Fetching fusion protector pastes links", FetchPastesForFetchers),
-        ("Fetching fusion protector controversial people", FProtectorControversialPeople),
-        ("Fetching fusion protector community notes", FetchCommunitynotes),
-        ("Fetching fusion protector global bans", FetchfpGlobalBan),
         ("Fetching fusion protector NSFW block list", FetchNSFWBLOCKED),
         ("Fetching fusion protector media protections", FetchMediaProtections),
         ("Fetching fusion protector media domains", FetchMediaDoms),
@@ -1779,34 +1535,51 @@ Steam Page Link = https://steamcommunity.com/profiles/{primarySteamId}";
                 isUpdating = false;
             }
 
-            public static IEnumerator ReadFromSite(string url, System.Action<string> sitetextaction)
+            public static IEnumerator ReadFromSite(string url, Action<string> sitetextaction)
             {
-                UnityWebRequest www = UnityWebRequest.Get(url);
-                www.SetRequestHeader("User-Agent", "Mozilla/5.0");
-                www.SetRequestHeader("Accept", "*/*");
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
-
-                yield return www.SendWebRequest();
-
-                if (www.isNetworkError || www.isHttpError)
+                using (HttpClient client = new HttpClient())
                 {
-                    MelonLogger.Warning("Error fetching Site Text: " + www.error + $" url : {url}");
-                }
-                else
-                {
-                    string json = www.downloadHandler.text;
+                    client.DefaultRequestHeaders.UserAgent.ParseAdd(
+                        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) " +
+                        "AppleWebKit/537.36 (KHTML, like Gecko) " +
+                        "Chrome/120.0.0.0 Safari/537.36"
+                    );
+
+                    client.DefaultRequestHeaders.Accept.Add(
+                        new MediaTypeWithQualityHeaderValue("*/*")
+                    );
+
+                    Task<string> request = client.GetStringAsync(url);
+
+                    while (!request.IsCompleted)
+                        yield return null;
+
+                    if (request.IsFaulted)
+                    {
+                        MelonLogger.Warning(
+                            "Error fetching Site Text: " +
+                            request.Exception +
+                            $" url : {url}"
+                        );
+
+                        yield break;
+                    }
 
                     try
                     {
-                        sitetextaction?.Invoke(json);
+                        sitetextaction?.Invoke(request.Result);
                     }
-                    catch (System.Exception ex)
+                    catch (Exception ex)
                     {
-                        MelonLogger.Warning("Error fetching Site Text : " + ex.Message + $" url : {url}");
+                        MelonLogger.Warning(
+                            "Error processing Site Text: " +
+                            ex.Message +
+                            $" url : {url}"
+                        );
                     }
                 }
-
-                www.Dispose();
             }
             //
 
@@ -4009,7 +3782,6 @@ string map, Vector3 position,
         internal static bool globalblocklistnotification = true;
         internal static bool globalblocklistnow = true;
         internal static float timerfoeesa = 10;
-        internal static bool globalFPBANLIST = true;
         internal static bool globalbannotification = true;
         internal static bool DESPAWNPROTECTION = true;
         internal static bool privatekicksteam = false;
@@ -4295,9 +4067,7 @@ string map, Vector3 position,
                 var pool = PlayersOnline
                     .Where(p =>
                         p.PlatformID != localPlayer.PlatformID &&
-                        !BanManager.BanList.Bans.Any(x => x.Player.PlatformID == p.PlatformID) &&
-                        !SiteStuff.globalfpbans.Any(x => x.KnownSteamIds.Contains(p.PlatformID.ToString())) &&
-                        !SiteStuff.fpcpeople.Any(x => x.KnownSteamIds.Contains(p.PlatformID.ToString())))
+                        !BanManager.BanList.Bans.Any(x => x.Player.PlatformID == p.PlatformID))
                     .GroupBy(p => p.PlatformID)
                     .Select(g => g.First())
                     .ToList();
@@ -5496,92 +5266,6 @@ valuedefault
 
                 InvokeWithType(typeof(MenuLocation), "AddModerationGroup", new object[] { activeLobbyInfo, actionsPage, player, selfLevel, level });
 
-                var banchecknow = SiteStuff.globalfpbans.FirstOrDefault((result) => result.KnownSteamIds.Contains(player.PlatformID.ToString()));
-                if (banchecknow != null)
-                {
-                    actionsPage.AddElement<FunctionElement>("Fusion Protector Global Banned : YES")
-                      .WithColor(Color.red)
-                      .Do(() =>
-                      {
-                          NotificationNowAlways(FusionProtectorInfo.ClientName + " Global Ban", $"User : {banchecknow.FusionNicknameAtTheTime}\nReason : {banchecknow.Reason}\nSteam ID : {player.PlatformID.ToString()}", NotificationType.SUCCESS, 3.0f, true, true, () => { CheckSteamID(player.PlatformID); });
-
-                      });
-                    if (!string.IsNullOrEmpty(banchecknow.OptionalProof))
-                    {
-
-
-                        actionsPage.AddElement<FunctionElement>("Show Ban Info")
-                          .WithColor(Color.red)
-                          .Do(() =>
-                          {
-                              NotificationNowAlways(FusionProtectorInfo.ClientName + " Global Ban", $"Proof Of Ban\nUser : {banchecknow.OptionalProof}", NotificationType.SUCCESS, 3.0f, true, true, () => { banchecknow.ShowOnPC(); });
-
-                          });
-                    }
-                }
-
-                var playerfromfpcl = SiteStuff.fpcpeople.FirstOrDefault((result) => result.KnownSteamIds.Contains(player.PlatformID.ToString()));
-                if (playerfromfpcl != null)
-                {
-                    actionsPage.AddElement<FunctionElement>("Show Controversial Status")
-                        .WithColor(Color.yellow)
-                        .Do(() =>
-                        {
-                            NotificationNowAlways("Controversial Person", $"User : {playerfromfpcl.FusionNicknameAtTheTime}\nReason : {playerfromfpcl.Reason}\nControversy Level : {playerfromfpcl.ControversyLevel}", NotificationType.WARNING, 6.0f, true, true, () => { playerfromfpcl.ShowOnPC(); });
-                        });
-                }
-
-                var playerfromcomnotes = SiteStuff.communitynotedplayers.FirstOrDefault((result) => result.KnownSteamIds.Contains(player.PlatformID.ToString()));
-                if (playerfromcomnotes != null)
-                {
-                    var actionsPage4 = actionsPage.AddElement<GroupElement>("Fusion Protector Community Note");
-
-                    actionsPage4.AddElement<FunctionElement>("Show On PC")
-    .WithColor(Color.yellow)
-    .Do(() =>
-    {
-        NotificationNowAlways("Community Note", "Showing On PC", NotificationType.WARNING, 6.0f, true, true, () => { playerfromcomnotes.ShowOnPC(); });
-
-    });
-
-
-                    actionsPage4.AddElement<FunctionElement>("Show Note")
-                        .WithColor(Color.yellow)
-                        .Do(() =>
-                        {
-                            NotificationNow("Community Note", string.Join(Environment.NewLine, playerfromcomnotes.Note), NotificationType.WARNING, 6.0f, true, true, () => { CheckSteamID(player.PlatformID); });
-
-                        });
-
-                    actionsPage4.AddElement<FunctionElement>("Show Known Fusion NickNames")
-                      .WithColor(Color.yellow)
-                      .Do(() =>
-                      {
-                          NotificationNow("Community Note", string.Join(Environment.NewLine, playerfromcomnotes.KnownFusionNickNames), NotificationType.WARNING, 6.0f, true, true, () => { CheckSteamID(player.PlatformID); });
-
-                      });
-
-                    actionsPage4.AddElement<FunctionElement>("Show Known Steam Names")
-                      .WithColor(Color.yellow)
-                      .Do(() =>
-                      {
-                          NotificationNow("Community Note", string.Join(Environment.NewLine, playerfromcomnotes.KnownSteamNames), NotificationType.WARNING, 6.0f, true, true, () => { CheckSteamID(player.PlatformID); });
-
-                      });
-
-                    actionsPage4.AddElement<FunctionElement>("Show Known Steam SteamIDS")
-                      .WithColor(Color.yellow)
-                      .Do(() =>
-                      {
-                          NotificationNow("Community Note", string.Join(Environment.NewLine, playerfromcomnotes.KnownSteamIds), NotificationType.WARNING, 6.0f, true, true, () => { CheckSteamID(player.PlatformID); });
-
-                      });
-                }
-
-
-
-
-
                 if (player.PlatformID != SteamIdYours())
                 {
                     var actionsPage2 = actionsPage.AddElement<GroupElement>("Protector Options");
@@ -5914,89 +5598,6 @@ valuedefault
                         .WithColor(Color.red)
                         .WithInteractability(false);
                     }
-
-                    var banchecknow = SiteStuff.globalfpbans.FirstOrDefault((result) => result.KnownSteamIds.Contains(info.PlatformID.ToString()));
-                    if (banchecknow != null)
-                    {
-                        actionsPage.AddElement<FunctionElement>("Fusion Protector Global Banned : YES")
-                          .WithColor(Color.red)
-                          .Do(() =>
-                          {
-                              NotificationNowAlways(FusionProtectorInfo.ClientName + " Global Ban", $"User : {banchecknow.FusionNicknameAtTheTime}\nReason : {banchecknow.Reason}\nSteam ID : {info.PlatformID.ToString()}", NotificationType.SUCCESS, 3.0f, true, true, () => { CheckSteamID(info.PlatformID); });
-
-                          });
-                        if (!string.IsNullOrEmpty(banchecknow.OptionalProof))
-                        {
-
-
-                            actionsPage.AddElement<FunctionElement>("Show Ban Info")
-                              .WithColor(Color.red)
-                              .Do(() =>
-                              {
-                                  NotificationNowAlways(FusionProtectorInfo.ClientName + " Global Ban", $"Proof Of Ban\nUser : {banchecknow.OptionalProof}", NotificationType.SUCCESS, 3.0f, true, true, () => { banchecknow.ShowOnPC(); });
-
-                              });
-                        }
-                    }
-
-                    var playerfromfpcl = SiteStuff.fpcpeople.FirstOrDefault((result) => result.KnownSteamIds.Contains(info.PlatformID.ToString()));
-                    if (playerfromfpcl != null)
-                    {
-
-                        actionsPage.AddElement<FunctionElement>("Show Controversial Status")
-                                              .WithColor(Color.yellow)
-                                              .Do(() =>
-                                              {
-                                                  NotificationNowAlways("Controversial Person", $"User : {playerfromfpcl.FusionNicknameAtTheTime}\nReason : {playerfromfpcl.Reason}\nControversy Level : {playerfromfpcl.ControversyLevel}", NotificationType.WARNING, 6.0f, true, true, () => { playerfromfpcl.ShowOnPC(); });
-
-                                              });
-                    }
-
-                    var playerfromcomnotes = SiteStuff.communitynotedplayers.FirstOrDefault((result) => result.KnownSteamIds.Contains(info.PlatformID.ToString()));
-                    if (playerfromcomnotes != null)
-                    {
-                        var actionsPage4 = actionsPage.AddElement<GroupElement>("Fusion Protector Community Note");
-                        actionsPage4.AddElement<FunctionElement>("Show On PC")
-                        .WithColor(Color.yellow)
-                        .Do(() =>
-                        {
-                            NotificationNowAlways("Community Note", "Showing On PC", NotificationType.WARNING, 6.0f, true, true, () => { playerfromcomnotes.ShowOnPC(); });
-
-                        });
-                        actionsPage4.AddElement<FunctionElement>("Show Note")
-                            .WithColor(Color.yellow)
-                            .Do(() =>
-                            {
-                                NotificationNowAlways("Community Note", playerfromcomnotes.Note, NotificationType.WARNING, 6.0f, true, true, () => { CheckSteamID(info.PlatformID); });
-
-                            });
-
-                        actionsPage4.AddElement<FunctionElement>("Show Known Fusion NickNames")
-                          .WithColor(Color.yellow)
-                          .Do(() =>
-                          {
-                              NotificationNowAlways("Community Note", string.Join(Environment.NewLine, playerfromcomnotes.KnownFusionNickNames), NotificationType.WARNING, 6.0f, true, true, () => { CheckSteamID(info.PlatformID); });
-
-                          });
-
-                        actionsPage4.AddElement<FunctionElement>("Show Known Steam Names")
-                          .WithColor(Color.yellow)
-                          .Do(() =>
-                          {
-                              NotificationNowAlways("Community Note", string.Join(Environment.NewLine, playerfromcomnotes.KnownSteamNames), NotificationType.WARNING, 6.0f, true, true, () => { CheckSteamID(info.PlatformID); });
-
-                          });
-
-                        actionsPage4.AddElement<FunctionElement>("Show Known Steam SteamIDS")
-                          .WithColor(Color.yellow)
-                          .Do(() =>
-                          {
-                              NotificationNowAlways("Community Note", string.Join(Environment.NewLine, playerfromcomnotes.KnownSteamIds), NotificationType.WARNING, 6.0f, true, true, () => { CheckSteamID(info.PlatformID); });
-
-                          });
-                    }
-
-
 
                     var actionsPage3 = actionsPage.AddElement<GroupElement>(NetworkInfo.IsHost ? "Protector Server Options" : "Protector Host Only Options");
 
@@ -7969,33 +7570,6 @@ valuedefault
                         return false;
                     }
                 }
-
-
-
-                if (globalFPBANLIST)
-                {
-                    var banchecknow = SiteStuff.globalfpbans.FirstOrDefault((result) => result.KnownSteamIds.Contains(platformId.ToString()));
-                    
-                    //this just a backup for steam spoof id
-                    if (platformId != requestInfo.BackupPlatformID)
-                    {
-                        ConnectionSender.SendConnectionDeny(platformId.Value, string.Empty);
-                        return false;
-                    }
-                    //
-
-
-                    if (banchecknow != null)
-                    {
-                        if (globalbannotification)
-                        {
-                            NotificationNowAlways(FusionProtectorInfo.ClientName + " Global Ban", $"User Tried Connecting : {banchecknow.FusionNicknameAtTheTime}\nReason : {banchecknow.Reason}\nSteam ID : {platformId.ToString()}", NotificationType.SUCCESS, 3.0f, true, true, () => { banchecknow.ShowOnPC(); });
-                        }
-                        ConnectionSender.SendConnectionDeny(platformId.Value, string.Empty);
-                        return false;
-                    }
-                }
-
 
                 return true;
             }
@@ -14673,25 +14247,6 @@ FusionProtectorInfo.ClientName,
 
                             StoredJoinPlayers.Add(activeone);
 
-                            var playerfromfpcl = SiteStuff.fpcpeople.FirstOrDefault(result => result.KnownSteamIds.Contains(play.PlayerID.PlatformID.ToString()) && play.PlayerID.PlatformID.ToString() != SteamIdYours().ToString());
-                            if (playerfromfpcl != null)
-                            {
-                                NotificationNowAlways("Controversial Person", $"User : {playerfromfpcl.FusionNicknameAtTheTime}\nReason : {playerfromfpcl.Reason}\nControversy Level : {playerfromfpcl.ControversyLevel}\nNote On Player : {CleanedNAME(play)}", NotificationType.WARNING, 6.0f, true, true, () => { playerfromfpcl.ShowOnPC(); });
-                                SpawnEffects.CallDespawnEffect(play.MarrowEntity);
-                            }
-
-                            var playerfromcomnotes = SiteStuff.communitynotedplayers
-                                .FirstOrDefault(result =>
-                                    result.KnownSteamIds.Contains(play.PlayerID.PlatformID.ToString()) &&
-                                    play.PlayerID.PlatformID.ToString() != SteamIdYours().ToString()
-                                );
-
-                            if (playerfromcomnotes != null)
-                            {
-                                NotificationNowAlways($"{playerfromcomnotes.FusionNicknameAtTheTime} Community Note", playerfromcomnotes.Note+$"\nNote On Player : {CleanedNAME(play)}", NotificationType.WARNING, 6.0f, true, true, () => { playerfromcomnotes.ShowOnPC(); });
-                                SpawnEffects.CallDespawnEffect(play.MarrowEntity);
-                            }
-
                         }
                     }
 
@@ -14796,29 +14351,6 @@ FusionProtectorInfo.ClientName,
                     };
 
                     StoredJoinPlayers.Add(activeone);
-
-                    var playerfromfpcl = SiteStuff.fpcpeople
-                        .FirstOrDefault(result =>
-                            result.KnownSteamIds.Contains(now.PlatformID.ToString()) &&
-                            now.PlatformID.ToString() != SteamIdYours().ToString()
-                        );
-                    if (playerfromfpcl != null)
-                    {
-                        NotificationNowAlways("Controversial Person", $"User : {playerfromfpcl.FusionNicknameAtTheTime}\nReason : {playerfromfpcl.Reason}\nControversy Level : {playerfromfpcl.ControversyLevel}" + $"\nNote On Player : {CleanedNAME(joinednetty)}", NotificationType.WARNING, 6.0f, true, true, () => { playerfromfpcl.ShowOnPC(); });
-                        SpawnEffects.CallDespawnEffect(joinednetty.MarrowEntity);
-                    }
-
-                    var playerfromcomnotes = SiteStuff.communitynotedplayers
-                        .FirstOrDefault(result =>
- result.KnownSteamIds.Contains(now.PlatformID.ToString()) &&
-now.PlatformID.ToString() != SteamIdYours().ToString());
-
-                    if (playerfromcomnotes != null)
-                    {
-                        NotificationNowAlways($"{playerfromcomnotes.FusionNicknameAtTheTime} Community Note", playerfromcomnotes.Note+$"\nNote On Player : {CleanedNAME(joinednetty)}", NotificationType.WARNING, 6.0f, true, true, () => { playerfromcomnotes.ShowOnPC(); });
-                        SpawnEffects.CallDespawnEffect(joinednetty.MarrowEntity);
-
-                    }
 
                     _ = SiteStuff.AltPrevention(now.PlatformID);
 
@@ -17761,10 +17293,6 @@ now.PlatformID.ToString() != SteamIdYours().ToString());
             Protectsettings.Logsettings("Keep Hidden Mods", Color.cyan, ref keephiddenmods, enabled =>
             {
                 keephiddenmods = enabled;
-            });
-            Protectsettings.Logsettings("Global FP Banlist", Color.cyan, ref globalFPBANLIST, enabled =>
-            {
-                globalFPBANLIST = enabled;
             });
             Protectsettings.Logsettings("Global FP Blacklist", Color.cyan, ref globalblocklistnow, enabled =>
             {

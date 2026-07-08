@@ -186,3 +186,4 @@ C:\Users\lacey\Desktop\FusionProtectorJR\Code\obj\Debug\net6.0\FusionProtectorBy
 C:\Users\lacey\Desktop\FusionProtectorJR\Code\obj\Debug\net6.0\refint\FusionProtectorByJamesReborn.dll
 C:\Users\lacey\Desktop\FusionProtectorJR\Code\obj\Debug\net6.0\FusionProtectorByJamesReborn.pdb
 C:\Users\lacey\Desktop\FusionProtectorJR\Code\obj\Debug\net6.0\ref\FusionProtectorByJamesReborn.dll
+C:\Users\lacey\Desktop\FusionProtectorJR\Code\obj\Debug\net6.0\FusionProtectorByJamesReborn.sourcelink.json
