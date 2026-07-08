@@ -1170,7 +1170,6 @@ namespace FusionProtectorByJamesReborn
             public static string MediaBlocker;
             public static string NSFWBlocker;
             public static string GlobalFPBlacklist;
-            public static string communitynotes;
             public static string mostusedthings;
 
             private static readonly JsonSerializerOptions options = new()
@@ -1251,10 +1250,6 @@ namespace FusionProtectorByJamesReborn
 
                                 case "globalfpblacklist":
                                     GlobalFPBlacklist = right;
-                                    break;
-
-                                case "communitynotes":
-                                    communitynotes = right;
                                     break;
 
                                 case "mostuseditemsexclude":
